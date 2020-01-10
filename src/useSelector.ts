@@ -4,7 +4,7 @@ import { useReduxContext } from './Context';
 type Selector<State, Selected> = (state: State) => Selected;
 type EqualityFn<Selected> = (a: Selected, b: Selected) => boolean;
 
-const defaultEqualityFn = (a: any, b: any) => a === b;
+const defaultEqualityFn = <T>(a: T, b: T) => a === b;
 export function useSelector<State, Selected>(
   selector: Selector<State, Selected>,
   equalityFn: EqualityFn<Selected> = defaultEqualityFn,
@@ -12,7 +12,7 @@ export function useSelector<State, Selected>(
   const { store, subscription } = useReduxContext();
   const [, forceRender] = useReducer(s => s + 1, 0);
 
-  const latestSelectedState = useRef<any>();
+  const latestSelectedState = useRef<Selected>();
   const selectedState = selector(store.getState());
 
   function checkForUpdates() {

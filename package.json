@@ -17,6 +17,7 @@
     "react": "16.x"
   },
   "devDependencies": {
+    "@types/react-dom": "^16.9.4",
     "@types/react-redux": "^7.1.5",
     "antd": "^3.26.6",
     "father": "^2.16.0",

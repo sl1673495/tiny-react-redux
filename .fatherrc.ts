@@ -1,9 +1,12 @@
 import { IBundleOptions } from 'father';
+import { DeepPartial } from './typings';
 
-const options: IBundleOptions = {
+type FixedIBundleOptions = DeepPartial<IBundleOptions>;
+
+const options: FixedIBundleOptions = {
   cjs: 'rollup',
   esm: 'rollup',
-  doc: { typescript: true },
+  doc: { typescript: true, title: 'tiny-react-redux使用文档' },
 };
 
 export default options;

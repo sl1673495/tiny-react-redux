@@ -1,22 +1,23 @@
-import { unstable_batchedUpdates as batch } from 'react-dom';
+import { Store } from 'redux';
 
 export class Subscription {
-  constructor(store) {
+  store: Store
+  listeners: Function[]
+  unsubscribe: Function | null
+
+  constructor(store: Store) {
     this.store = store;
     this.listeners = [];
     this.handleChangeWrapper = this.handleChangeWrapper.bind(this);
     this.unsubscribe = null;
   }
 
-  addSub(listener) {
+  addSub(listener: Function) {
     this.listeners.push(listener);
   }
 
   notify() {
-    // 批量更新
-    batch(() => {
-      this.listeners.forEach(callback => callback());
-    });
+    this.listeners.forEach(callback => callback());
   }
 
   handleChangeWrapper() {
