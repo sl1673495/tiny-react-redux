@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
 import { Store } from 'redux';
-import { Subscription } from './Subscription';
 
 interface ContextType {
   store: Store;
-  subscription: Subscription;
 }
 export const Context = React.createContext<ContextType | null>(null);
 

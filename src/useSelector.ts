@@ -9,7 +9,7 @@ export function useSelector<State, Selected>(
   selector: Selector<State, Selected>,
   equalityFn: EqualityFn<Selected> = defaultEqualityFn,
 ) {
-  const { store, subscription } = useReduxContext();
+  const { store } = useReduxContext();
   const [, forceRender] = useReducer(s => s + 1, 0);
 
   const latestSelectedState = useRef<Selected>();
@@ -33,8 +33,8 @@ export function useSelector<State, Selected>(
 
   // store被dispatch触发改变后 执行checkForUpdates
   useEffect(() => {
-    subscription.addSub(checkForUpdates);
-    subscription.trySubscribe();
+    const unsubscribe = store.subscribe(checkForUpdates);
+    return unsubscribe;
   }, []);
 
   return selectedState;

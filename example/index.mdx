@@ -9,6 +9,11 @@ import Counter from './Index';
 
 ## 示例
 
+### 实现的核心api
+1. `Provider` 在应用的最外层包裹，用来把redux的store传递给子组件。
+2. `useSelector` 用来在页面中订阅store中的状态。
+3. `useDispatch` 用来拿到redux的dispatch方法。
+
 ### redux store的定义
 ```ts
 import { createStore } from 'redux';
@@ -63,9 +68,9 @@ export const store = createStore(reducer);
 
 ### 页面组件的编写
 ```ts
-import React, { useState, useCallback, memo } from 'react';
-import { Card, Button } from 'antd';
-import { Provider, useSelector, useDispatch } from '../src';
+import React, { useState, useCallback } from 'react';
+import { Card, Button, Input } from 'antd';
+import { Provider, useSelector, useDispatch } from '../dist';
 import { store, State, ActionType } from './store';
 import './index.css';
 import 'antd/dist/antd.css';
@@ -78,17 +83,16 @@ function Count() {
 
   dispatch({
     type: 'log',
-    payload: 'count render',
+    payload: '计数器组件重新渲染🚀',
   });
   return (
-    <section className="wrap">
-      <Card hoverable style={{ marginBottom: 24 }}>
-        <div className="chunk">
-          <div className="chunk">store中的count现在是 {count}</div>
-          <Button onClick={add}>add</Button>
-        </div>
-      </Card>
-    </section>
+    <Card hoverable style={{ marginBottom: 24 }}>
+      <h1>计数器</h1>
+      <div className="chunk">
+        <div className="chunk">store中的count现在是 {count}</div>
+        <Button onClick={add}>add</Button>
+      </div>
+    </Card>
   );
 }
 
@@ -99,7 +103,7 @@ function Chat() {
 
   dispatch({
     type: 'log',
-    payload: 'chat render',
+    payload: '聊天室组件重新渲染💐',
   });
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -114,7 +118,7 @@ function Chat() {
       <h1>聊天室</h1>
       当前消息是: {message}
       <form onSubmit={onSubmit}>
-        <input onChange={e => setValue(e.target.value)} placeholder="请输入消息" />
+        <Input onChange={e => setValue(e.target.value)} placeholder="请输入消息" />
       </form>
     </Card>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Card, Button, Input } from 'antd';
-import { Provider, useSelector, useDispatch } from '../dist';
+import { Provider, useSelector, useDispatch } from '../src';
 import { store, State, ActionType } from './store';
 import './index.css';
 import 'antd/dist/antd.css';
@@ -61,8 +61,10 @@ function Logger() {
     <Card hoverable>
       <h1>控制台</h1>
       <div className="logs">
-        {logs.map(log => (
-          <p className="log">{log}</p>
+        {logs.map((log, idx) => (
+          <p className="log" key={idx}>
+            {log}
+          </p>
         ))}
       </div>
     </Card>
@@ -70,6 +72,7 @@ function Logger() {
 }
 
 export default () => {
+  const [show, setShow] = useState(true);
   return (
     <Provider store={store}>
       <div className="flex">
