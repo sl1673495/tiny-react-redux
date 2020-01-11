@@ -72,7 +72,6 @@ function Logger() {
 }
 
 export default () => {
-  const [show, setShow] = useState(true);
   return (
     <Provider store={store}>
       <div className="flex">

@@ -12,8 +12,8 @@ export function useSelector<State, Selected>(
   const { store } = useReduxContext();
   const [, forceRender] = useReducer(s => s + 1, 0);
 
-  const latestSelectedState = useRef<Selected>();
   const selectedState = selector(store.getState());
+  const latestSelectedState = useRef<Selected>(selectedState);
 
   function checkForUpdates() {
     const newSelectedState = selector(store.getState());
@@ -25,11 +25,6 @@ export function useSelector<State, Selected>(
     latestSelectedState.current = newSelectedState;
     forceRender();
   }
-
-  // 渲染后 保存上一次的selector返回值
-  useEffect(() => {
-    latestSelectedState.current = selectedState;
-  });
 
   // store被dispatch触发改变后 执行checkForUpdates
   useEffect(() => {
