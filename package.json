@@ -11,7 +11,9 @@
   "repository": "/tiny-react-redux",
   "scripts": {
     "dev": "father doc dev",
-    "build": "father build"
+    "build-doc": "father doc build",
+    "build-lib": "father build",
+    "build": "npm run build-doc & npm run build-lib"
   },
   "peerDependencies": {
     "react": "16.x"
