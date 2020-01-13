@@ -5,6 +5,10 @@ TypeScript实现最精简版本的react-redux
 ## 文档
 https://sl1673495.github.io/tiny-react-redux/
 
+## 讲解文章
+React-Redux 100行代码简易版探究原理。
+https://juejin.im/post/5e1995a66fb9a02fdc3a44b4
+
 ## 目的
 本仓库的编写目的是尽可能最小化还原react-redux的实现，以此来探究它是如何把redux和react连接起来。
 
